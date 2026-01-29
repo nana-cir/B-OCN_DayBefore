@@ -5,20 +5,39 @@ import jpholiday
 # --- 1. 設定 ---
 st.set_page_config(page_title="B-OCN申込み逆算ツール", layout="centered")
 
-# --- 2. デザイン調整（強力版） ---
+# --- 2. デザイン調整（最強版） ---
 st.markdown("""
     <style>
-    /* メニュー、ヘッダー、フッターを非表示にする */
-    #MainMenu {visibility: hidden;}
-    header {visibility: hidden;}
-    footer {visibility: hidden;}
+    /* ヘッダー（上のバー・右上のアイコン・メニュー）を物理的に消す */
+    header[data-testid="stHeader"] {
+        display: none !important;
+    }
     
-    /* 開発者用ツールバーなども可能な限り消す */
-    div[data-testid="stStatusWidget"] {visibility: hidden;}
+    /* フッター（下のMade with Streamlit）を物理的に消す */
+    footer {
+        display: none !important;
+    }
     
-    /* 結果カードのデザイン */
+    /* 右下のツールバーや開発者メニューも念のため消す */
+    div[data-testid="stStatusWidget"] {
+        display: none !important;
+    }
+    div[data-testid="stToolbar"] {
+        display: none !important;
+    }
+    .stDeployButton {
+        display: none !important;
+    }
+    
+    /* スマホで見やすくするための余白調整（ヘッダーを消した分、上を詰める） */
+    .block-container {
+        padding-top: 1rem !important;
+        padding-bottom: 1rem !important;
+    }
+
+    /* 結果カードのデザイン（ダークモード対応） */
     .result-card {
-        background-color: #262730; /* ダークモードに馴染む濃いグレー */
+        background-color: #262730;
         border-left: 5px solid #ff4b4b;
         padding: 20px;
         border-radius: 10px;
@@ -42,7 +61,6 @@ st.markdown("""
     }
     </style>
     """, unsafe_allow_html=True)
-
 # --- 3. ロジック関数 ---
 
 def get_business_day_delta(start_date, days, direction="forward"):

@@ -8,6 +8,14 @@ st.set_page_config(page_title="B-OCN申込み逆算ツール", layout="centered"
 # カスタムCSS（スマホ見やすさ重視＆標準アラート回避のスタイル）
 st.markdown("""
     <style>
+    /* 右上のメニューボタン（三点リーダー）を消す */
+    #MainMenu {visibility: hidden;}
+    /* ヘッダーの装飾を消す（もしあれば） */
+    header {visibility: hidden;}
+    /* 下のMade with Streamlitを消す */
+    footer {visibility: hidden;}
+    </style>
+    """, unsafe_allow_html=True)
     .result-card {
         background-color: #f0f2f6;
         border-left: 5px solid #ff4b4b;
